@@ -11,7 +11,9 @@ import static org.springframework.http.HttpStatus.OK;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum SuccessCode {
     // 200 OK
-    READ_BOOK_LIST_SUCCESS(OK, "책 목록 조회에 성공했습니다.");
+    SIGN_UP_SUCCESS(OK, "회원가입에 성공했습니다."),
+    LOGIN_SUCCESS(OK, "로그인에 성공했습니다.");
+
 
     private final HttpStatus httpStatus;
     private final String message;
