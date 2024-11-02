@@ -1,14 +1,12 @@
-package com.capstone.storytune.domain.user.util;
+package com.capstone.storytune.domain.user.jwt;
 
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 
 @Component
 @RequiredArgsConstructor

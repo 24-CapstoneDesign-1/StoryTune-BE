@@ -1,5 +1,7 @@
-package com.capstone.storytune.domain.user.util;
+package com.capstone.storytune.domain.user.authentication;
 
+import com.capstone.storytune.domain.user.jwt.JwtValidationType;
+import com.capstone.storytune.domain.user.jwt.TokenValidator;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

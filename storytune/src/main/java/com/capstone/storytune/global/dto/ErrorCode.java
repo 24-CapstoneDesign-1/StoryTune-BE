@@ -11,6 +11,7 @@ public enum ErrorCode {
     // 400 Bad Request
 
     // 401 Unauthorized
+    UNAUTHORIZED_EXCEPTION(HttpStatus.UNAUTHORIZED, "권한이 없습니다."),
 
     // 403 forbidden
     WRONG_PASSWORD_EXCEPTION(HttpStatus.FORBIDDEN, "잘못된 비밀번호입니다."),

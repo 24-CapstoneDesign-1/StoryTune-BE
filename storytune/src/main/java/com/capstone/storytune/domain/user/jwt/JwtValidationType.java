@@ -1,4 +1,4 @@
-package com.capstone.storytune.domain.user.util;
+package com.capstone.storytune.domain.user.jwt;
 
 public enum JwtValidationType {
     VALID_JWT,

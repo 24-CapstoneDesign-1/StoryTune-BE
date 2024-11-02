@@ -1,4 +1,4 @@
-package com.capstone.storytune.domain.user.util;
+package com.capstone.storytune.domain.user.authentication;
 
 import lombok.Builder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

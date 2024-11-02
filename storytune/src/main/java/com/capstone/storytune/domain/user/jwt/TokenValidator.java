@@ -1,4 +1,4 @@
-package com.capstone.storytune.domain.user.util;
+package com.capstone.storytune.domain.user.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

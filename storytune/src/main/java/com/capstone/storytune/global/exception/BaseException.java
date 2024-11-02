@@ -1,5 +1,6 @@
-package com.capstone.storytune.global.dto;
+package com.capstone.storytune.global.exception;
 
+import com.capstone.storytune.global.dto.ErrorCode;
 import lombok.Getter;
 
 @Getter

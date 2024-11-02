@@ -1,5 +1,6 @@
-package com.capstone.storytune.domain.user.util;
+package com.capstone.storytune.domain.user.jwt;
 
+import com.capstone.storytune.domain.user.authentication.UserAuthentication;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
