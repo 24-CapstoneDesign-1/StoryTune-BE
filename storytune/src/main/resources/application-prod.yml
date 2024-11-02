@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://storytune.c1q86i8y2gyi.ap-northeast-2.rds.amazonaws.com:3306/storytune
+    username: admin
+    password: ${spring.datasource.prod_password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
