@@ -7,7 +7,7 @@ import com.capstone.storytune.domain.user.dto.response.LoginResponse;
 import com.capstone.storytune.domain.user.exception.NotFoundUserNameException;
 import com.capstone.storytune.domain.user.exception.WrongPasswordException;
 import com.capstone.storytune.domain.user.repository.UserRepository;
-import com.capstone.storytune.domain.user.util.TokenGenerator;
+import com.capstone.storytune.domain.user.jwt.TokenGenerator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
