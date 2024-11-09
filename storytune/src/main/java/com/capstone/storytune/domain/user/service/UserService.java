@@ -4,6 +4,7 @@ import com.capstone.storytune.domain.user.domain.User;
 import com.capstone.storytune.domain.user.dto.request.LoginRequest;
 import com.capstone.storytune.domain.user.dto.request.SignupRequest;
 import com.capstone.storytune.domain.user.dto.response.LoginResponse;
+import com.capstone.storytune.domain.user.exception.NotFoundUserIdException;
 import com.capstone.storytune.domain.user.exception.NotFoundUserNameException;
 import com.capstone.storytune.domain.user.exception.WrongPasswordException;
 import com.capstone.storytune.domain.user.repository.UserRepository;
@@ -13,8 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static com.capstone.storytune.global.dto.ErrorCode.NOT_FOUND_USER_NAME_EXCEPTION;
-import static com.capstone.storytune.global.dto.ErrorCode.WRONG_PASSWORD_EXCEPTION;
+import static com.capstone.storytune.global.dto.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +48,11 @@ public class UserService {
         String accessToken = tokenGenerator.generateAccessToken(user.getId());
         String refreshToken = tokenGenerator.generateRefreshToken(user.getId());
         return LoginResponse.of(accessToken, refreshToken);
+    }
+
+
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundUserIdException(NOT_FOUND_USER_ID_EXCEPTION));
     }
 }

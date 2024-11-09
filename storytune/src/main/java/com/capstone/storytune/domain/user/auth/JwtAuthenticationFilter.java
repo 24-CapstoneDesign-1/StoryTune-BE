@@ -1,4 +1,4 @@
-package com.capstone.storytune.domain.user.authentication;
+package com.capstone.storytune.domain.user.auth;
 
 import com.capstone.storytune.domain.user.jwt.JwtValidationType;
 import com.capstone.storytune.domain.user.jwt.TokenValidator;
@@ -32,13 +32,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws IOException, ServletException {
         val token = getJwtFromRequest(request);
+
         if (isValid(token)) {
             val userId = tokenValidator.getUserFromJwt(token);
             val authentication = new UserAuthentication(userId, null, null);
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
         filterChain.doFilter(request, response);
     }
 

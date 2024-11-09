@@ -1,4 +1,4 @@
-package com.capstone.storytune.domain.user.authentication;
+package com.capstone.storytune.domain.user.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

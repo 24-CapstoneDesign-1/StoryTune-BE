@@ -12,4 +12,12 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     private Long id;
+
+    private String cover;
+
+    private String title;
+
+    private String author;
+
+    private String publisher;
 }

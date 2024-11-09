@@ -1,6 +1,6 @@
 package com.capstone.storytune.domain.user.jwt;
 
-import com.capstone.storytune.domain.user.authentication.UserAuthentication;
+import com.capstone.storytune.domain.user.auth.UserAuthentication;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +35,8 @@ public class TokenGenerator {
                 .setSubject(authentication.getPrincipal().toString()) // memberId를 subject로 설정
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + expirationTime));
+
+        claims.put("memberId", authentication.getPrincipal().toString());
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)

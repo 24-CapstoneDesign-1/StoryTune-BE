@@ -1,4 +1,4 @@
-package com.capstone.storytune.domain.user.authentication;
+package com.capstone.storytune.domain.user.auth;
 
 import lombok.Builder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +15,7 @@ public class UserAuthentication extends UsernamePasswordAuthenticationToken {
     ){
         super(principal, credentials, authorities);
     }
+
 
     public static UserAuthentication create(Object principal){
         return UserAuthentication.builder()
