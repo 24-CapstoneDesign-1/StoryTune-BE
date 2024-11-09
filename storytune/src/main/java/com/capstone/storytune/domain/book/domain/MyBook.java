@@ -13,4 +13,6 @@ public class MyBook extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mybook_id")
     private Long id;
+
+    
 }
