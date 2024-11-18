@@ -1,8 +1,10 @@
-package com.capstone.storytune.domain.book.domain;
+package com.capstone.storytune.domain.mybook.domain;
 
+import com.capstone.storytune.domain.book.domain.Book;
 import com.capstone.storytune.domain.user.domain.User;
 import com.capstone.storytune.global.entity.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -37,10 +39,15 @@ public class MyBook extends BaseEntity {
         this.completed = false;
     }
 
+    @Builder
     public MyBook(User user, Book book){
         this.user = user;
         this.book = book;
         this.completed = false;
+    }
+
+    public void updateTopic(Topic topic){
+        this.topic = topic;
     }
 
 }

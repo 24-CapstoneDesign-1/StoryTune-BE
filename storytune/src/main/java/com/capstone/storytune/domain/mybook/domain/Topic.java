@@ -1,4 +1,4 @@
-package com.capstone.storytune.domain.book.domain;
+package com.capstone.storytune.domain.mybook.domain;
 
 public enum Topic {
     FRIENDSHIP,

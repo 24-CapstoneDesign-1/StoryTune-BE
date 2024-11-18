@@ -1,4 +1,4 @@
-package com.capstone.storytune.domain.book.dto.response;
+package com.capstone.storytune.domain.mybook.dto.response;
 
 import lombok.Builder;
 

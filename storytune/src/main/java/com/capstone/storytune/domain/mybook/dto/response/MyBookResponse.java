@@ -1,6 +1,6 @@
-package com.capstone.storytune.domain.book.dto.response;
+package com.capstone.storytune.domain.mybook.dto.response;
 
-import com.capstone.storytune.domain.book.domain.MyBook;
+import com.capstone.storytune.domain.mybook.domain.MyBook;
 import com.capstone.storytune.global.util.TimeConverter;
 import lombok.Builder;
 
