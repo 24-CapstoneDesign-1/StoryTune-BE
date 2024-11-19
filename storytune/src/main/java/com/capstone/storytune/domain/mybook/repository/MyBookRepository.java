@@ -1,6 +1,6 @@
-package com.capstone.storytune.domain.book.repository;
+package com.capstone.storytune.domain.mybook.repository;
 
-import com.capstone.storytune.domain.book.domain.MyBook;
+import com.capstone.storytune.domain.mybook.domain.MyBook;
 import com.capstone.storytune.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
