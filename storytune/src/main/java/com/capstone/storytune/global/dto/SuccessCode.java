@@ -20,7 +20,8 @@ public enum SuccessCode {
 
     CREATE_MY_BOOK_SUCCESS(OK, "나만의 동화 만들기 생성에 성공했습니다."),
 
-    UPDATE_MY_BOOK_TOPIC_SUCCESS(OK, "나만의 동화 만들기 주제 생성에 성공했습니다.");
+    UPDATE_MY_BOOK_TOPIC_SUCCESS(OK, "나만의 동화 만들기 주제 생성에 성공했습니다."),
+    UPDATE_MY_BOOK_IMAGES_SUCCESS(OK, "나만의 동화 만들기 이미지 생성에 성공했습니다.");
 
     private final HttpStatus httpStatus;
     private final String message;

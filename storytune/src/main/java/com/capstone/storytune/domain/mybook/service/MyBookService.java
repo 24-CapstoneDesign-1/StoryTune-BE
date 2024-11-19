@@ -4,25 +4,32 @@ import com.capstone.storytune.domain.book.domain.Book;
 import com.capstone.storytune.domain.book.dto.response.BookResponse;
 import com.capstone.storytune.domain.book.dto.response.BooksResponse;
 import com.capstone.storytune.domain.book.repository.BookRepository;
+import com.capstone.storytune.domain.mybook.domain.MyBookContent;
+import com.capstone.storytune.domain.mybook.dto.request.ImagesRequest;
 import com.capstone.storytune.domain.mybook.dto.request.MyBookCreateRequest;
 import com.capstone.storytune.domain.mybook.dto.request.TopicRequest;
+import com.capstone.storytune.domain.mybook.dto.response.ImagesResponse;
 import com.capstone.storytune.domain.mybook.dto.response.MyBookCreateResponse;
 import com.capstone.storytune.domain.mybook.dto.response.MyBookResponse;
 import com.capstone.storytune.domain.mybook.dto.response.MyBooksResponse;
 import com.capstone.storytune.domain.mybook.domain.MyBook;
+import com.capstone.storytune.domain.mybook.exception.FailedUploadImageException;
 import com.capstone.storytune.domain.mybook.exception.NotFoundBookIdException;
 import com.capstone.storytune.domain.mybook.exception.NotFoundMyBookIdException;
+import com.capstone.storytune.domain.mybook.repository.MyBookContentRepository;
 import com.capstone.storytune.domain.mybook.repository.MyBookRepository;
 import com.capstone.storytune.domain.user.domain.User;
+import com.capstone.storytune.global.util.s3.service.S3Service;
 import jakarta.transaction.Transactional;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
-import static com.capstone.storytune.global.dto.ErrorCode.NOT_FOUND_BOOK_ID_EXCEPTION;
-import static com.capstone.storytune.global.dto.ErrorCode.NOT_FOUND_MY_BOOK_ID_EXCEPTION;
+import static com.capstone.storytune.global.dto.ErrorCode.*;
 
 @Service
 @Builder
@@ -31,6 +38,8 @@ import static com.capstone.storytune.global.dto.ErrorCode.NOT_FOUND_MY_BOOK_ID_E
 public class MyBookService {
     private final MyBookRepository myBookRepository;
     private final BookRepository bookRepository;
+    private final S3Service s3Service;
+    private final MyBookContentRepository myBookContentRepository;
 
     public MyBooksResponse getMyBooks(User user){
         List<MyBookResponse> myBooks = myBookRepository.findByUserOrderByCreatedAtDesc(user)
@@ -72,6 +81,30 @@ public class MyBookService {
 
         myBookRepository.save(newMyBook);
         return MyBookCreateResponse.of(newMyBook);
+    }
+
+    public ImagesResponse updateImages(ImagesRequest request, User user){
+        // 사진 리스트 추출
+        List<MultipartFile> images = request.images();
+
+        // S3 업로드 및 MyBookContent 생성
+        List<MyBookContent> myBookContents = images.stream()
+                .map(photo -> {
+                    String imageUrl;
+                    try{
+                        imageUrl = s3Service.uploadImage(photo);
+                    } catch (IOException e){
+                        throw new FailedUploadImageException(INTERNAL_SERVER_ERROR);
+                    }
+
+                    return MyBookContent.builder()
+                            .image(imageUrl)
+                            .build();
+                })
+                .map(myBookContentRepository::save)
+                .toList();
+
+        return ImagesResponse.of(myBookContents);
     }
 
     public void updateTopic(TopicRequest request, Long myBookId){

@@ -1,8 +1,10 @@
 package com.capstone.storytune.domain.mybook.controller;
 
 import com.capstone.storytune.domain.book.dto.response.BooksResponse;
+import com.capstone.storytune.domain.mybook.dto.request.ImagesRequest;
 import com.capstone.storytune.domain.mybook.dto.request.MyBookCreateRequest;
 import com.capstone.storytune.domain.mybook.dto.request.TopicRequest;
+import com.capstone.storytune.domain.mybook.dto.response.ImagesResponse;
 import com.capstone.storytune.domain.mybook.dto.response.MyBookCreateResponse;
 import com.capstone.storytune.domain.mybook.dto.response.MyBooksResponse;
 import com.capstone.storytune.domain.mybook.service.MyBookService;
@@ -46,6 +48,14 @@ public class MyBookController {
         return BaseResponse.success(CREATE_MY_BOOK_SUCCESS, result);
     }
 
+    // 동화 만들기 - 사진 업로드
+    @Operation(summary = "사진을 골라주세요!", description = "사진 업로드 API (페이지 순서대로)")
+    @PostMapping("/mybook/images")
+    public BaseResponse<ImagesResponse> updateImages(@RequestBody ImagesRequest request, @CurrentUser User user){
+        val result = myBookService.updateImages(request, user);
+        return BaseResponse.success(UPDATE_MY_BOOK_IMAGES_SUCCESS, result);
+    }
+
     // 동화 만들기 - 주제 고르기
     @Operation(summary = "새로운 이야기는 어떤 내용인가요?", description = "나만의 동화 만들기 주제 설정 API")
     @PatchMapping("/mybook/{myBookId}/topic")
@@ -53,4 +63,8 @@ public class MyBookController {
         myBookService.updateTopic(request, myBookId);
         return BaseResponse.success(UPDATE_MY_BOOK_TOPIC_SUCCESS);
     }
+
+    // 동화 만들기 - 한 페이지 단위 (사진, 가이드 질문, 등장인물)
+
+
 }
