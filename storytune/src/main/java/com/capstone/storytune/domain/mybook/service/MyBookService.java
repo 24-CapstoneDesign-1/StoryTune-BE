@@ -71,8 +71,12 @@ public class MyBookService {
     }
 
     public MyBookCreateResponse createMyBook(MyBookCreateRequest request, User user){
-        Book book = bookRepository.findById(request.bookId())
-                .orElseThrow(() -> new NotFoundBookIdException(NOT_FOUND_BOOK_ID_EXCEPTION));
+        Book book = null;
+
+        if(request.bookId() != null){
+            book = bookRepository.findById(request.bookId())
+                    .orElseThrow(() -> new NotFoundBookIdException(NOT_FOUND_BOOK_ID_EXCEPTION));
+        }
 
         MyBook newMyBook = MyBook.builder()
                 .book(book)

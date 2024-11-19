@@ -51,7 +51,7 @@ public class MyBookController {
     // 동화 만들기 - 사진 업로드
     @Operation(summary = "사진을 골라주세요!", description = "사진 업로드 API (페이지 순서대로)")
     @PostMapping("/mybook/images")
-    public BaseResponse<ImagesResponse> updateImages(@RequestBody ImagesRequest request, @CurrentUser User user){
+    public BaseResponse<ImagesResponse> updateImages(@ModelAttribute ImagesRequest request, @CurrentUser User user){
         val result = myBookService.updateImages(request, user);
         return BaseResponse.success(UPDATE_MY_BOOK_IMAGES_SUCCESS, result);
     }
@@ -63,8 +63,4 @@ public class MyBookController {
         myBookService.updateTopic(request, myBookId);
         return BaseResponse.success(UPDATE_MY_BOOK_TOPIC_SUCCESS);
     }
-
-    // 동화 만들기 - 한 페이지 단위 (사진, 가이드 질문, 등장인물)
-
-
 }
