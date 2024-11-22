@@ -21,6 +21,8 @@ public enum ErrorCode {
     NOT_FOUND_USER_ID_EXCEPTION(HttpStatus.BAD_REQUEST, "유효하지 않은 userId입니다."),
     NOT_FOUND_BOOK_ID_EXCEPTION(HttpStatus.BAD_REQUEST, "유효하지 않은 bookId입니다."),
     NOT_FOUND_MY_BOOK_ID_EXCEPTION(HttpStatus.BAD_REQUEST, "유효하지 않은 myBookId입니다."),
+    NOT_FOUND_MY_BOOK_CONTENT_EXCEPTION(HttpStatus.BAD_REQUEST, "유효하지 않은 myBookId와 pageNum 입니다."),
+    NOT_FOUND_MY_BOOK_CHARACTER_EXCEPTION(HttpStatus.BAD_REQUEST, "유효하지 않은 myBookCharacterId 입니다."),
 
     // 500 internal server error
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 에러가 발생했습니다.");
