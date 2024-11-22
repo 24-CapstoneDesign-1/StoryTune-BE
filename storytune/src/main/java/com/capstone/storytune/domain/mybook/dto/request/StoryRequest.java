@@ -1,8 +1,8 @@
 package com.capstone.storytune.domain.mybook.dto.request;
 
-public record MyBookContentUpdateRequest(
+public record StoryRequest(
         String content,
         boolean isLine,
-        String character
+        Long myBookCharacterId
 ) {
 }

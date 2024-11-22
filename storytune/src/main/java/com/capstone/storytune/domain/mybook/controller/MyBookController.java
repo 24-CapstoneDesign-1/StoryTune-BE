@@ -3,8 +3,10 @@ package com.capstone.storytune.domain.mybook.controller;
 import com.capstone.storytune.domain.book.dto.response.BooksResponse;
 import com.capstone.storytune.domain.mybook.dto.request.ImagesRequest;
 import com.capstone.storytune.domain.mybook.dto.request.MyBookCreateRequest;
+import com.capstone.storytune.domain.mybook.dto.request.StoryRequest;
 import com.capstone.storytune.domain.mybook.dto.request.TopicRequest;
 import com.capstone.storytune.domain.mybook.dto.response.ImagesResponse;
+import com.capstone.storytune.domain.mybook.dto.response.MyBookContentResponse;
 import com.capstone.storytune.domain.mybook.dto.response.MyBookCreateResponse;
 import com.capstone.storytune.domain.mybook.dto.response.MyBooksResponse;
 import com.capstone.storytune.domain.mybook.service.MyBookService;
@@ -63,4 +65,27 @@ public class MyBookController {
         myBookService.updateTopic(request, myBookId);
         return BaseResponse.success(UPDATE_MY_BOOK_TOPIC_SUCCESS);
     }
+
+    // 동화 만들기 - 상세 페이지 조회 (guide 질문 생성)
+    @Operation(summary = "이 사진을 보고 떠오르는 이야기를 들려주세요!", description = "나만의 동화 만들기 상세 페이지 조회 API")
+    @GetMapping("/mybook/{myBookId}/{pageNum}")
+    public BaseResponse<MyBookContentResponse> getMyBookDetail(@PathVariable Long myBookId, @PathVariable int pageNum){
+        val result = myBookService.getMyBookContent(myBookId, pageNum);
+        return BaseResponse.success(READ_MY_BOOK_CONTENT_SUCCESS, result);
+    }
+
+    // 동화 만들기 - 상세 페이지 이야기 생성 (이야기 저장 -> 포맷팅)
+    @Operation(summary = "이 사진을 보고 떠오르는 이야기를 들려주세요!", description = "나만의 동화 만들기 상세 페이지 이야기 생성 API")
+    @PatchMapping("/mybook/{myBookContentId}")
+    public BaseResponse updateStory(@RequestBody StoryRequest request, @PathVariable Long myBookContentId){
+        myBookService.updateStory(request, myBookContentId);
+        return BaseResponse.success(UPDATE_MY_BOOK_CONTENT_SUCCESS);
+    }
+
+    // 동화 만들기 - 제목 설정하기
+
+    // 내가 만든 동화 읽어보기 (영어 동화로 만들기)
+
+    // 내가 만든 동화 읽어보기 (버전 2가지 return)
+
 }

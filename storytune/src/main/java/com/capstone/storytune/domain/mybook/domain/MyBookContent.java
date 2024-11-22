@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
@@ -26,6 +27,8 @@ public class MyBookContent {
 
     private boolean isLine;
 
+    private MyBookCharacter character;
+
     @Column(columnDefinition = "TEXT")
     private String content;
 
@@ -38,5 +41,17 @@ public class MyBookContent {
     @Builder
     public MyBookContent(String image){
         this.image = image;
+    }
+
+    public void updateGuide(String guide){
+        this.guide = guide;
+    }
+
+    public void updateStory(String content, String scenario, String story, boolean isLine, MyBookCharacter character){
+        this.content = content;
+        this.content_scenario = scenario;
+        this.content_story = story;
+        this.isLine = isLine;
+        this.character = character;
     }
 }
