@@ -3,6 +3,7 @@ package com.capstone.storytune.domain.user.service;
 import com.capstone.storytune.domain.user.domain.User;
 import com.capstone.storytune.domain.user.dto.request.LoginRequest;
 import com.capstone.storytune.domain.user.dto.request.SignupRequest;
+import com.capstone.storytune.domain.user.dto.response.FriendSearchResponse;
 import com.capstone.storytune.domain.user.dto.response.LoginResponse;
 import com.capstone.storytune.domain.user.exception.NotFoundUserIdException;
 import com.capstone.storytune.domain.user.exception.NotFoundUserNameException;
@@ -54,5 +55,11 @@ public class UserService {
     public User getUserById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundUserIdException(NOT_FOUND_USER_ID_EXCEPTION));
+    }
+
+    public FriendSearchResponse getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundUserNameException(NOT_FOUND_USER_NAME_EXCEPTION));
+        return FriendSearchResponse.of(user);
     }
 }
