@@ -1,16 +1,15 @@
 package com.capstone.storytune.domain.user.dto.response;
 
 import com.capstone.storytune.domain.user.domain.User;
-import lombok.Builder;
 
 
-public record FriendSearchResponse(
+public record UserSearchResponse(
         Long userId,
         String name,
         String username
 ) {
-    public static FriendSearchResponse of(User user) {
-        return new FriendSearchResponse(
+    public static UserSearchResponse of(User user) {
+        return new UserSearchResponse(
                 user.getId(),
                 user.getName(),
                 user.getUsername()
