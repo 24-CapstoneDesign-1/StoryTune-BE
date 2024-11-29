@@ -7,12 +7,14 @@ import lombok.Builder;
 @Builder
 public record RoleResponse(
         String name,
-        String characterName
+        String characterName,
+        String image
 ) {
     public static RoleResponse of(Participant participant){
         return RoleResponse.builder()
                 .name(participant.getUser().getName())
                 .characterName(participant.getCharacter().getName())
+                .image(participant.getCharacter().getImage())
                 .build();
     }
 }

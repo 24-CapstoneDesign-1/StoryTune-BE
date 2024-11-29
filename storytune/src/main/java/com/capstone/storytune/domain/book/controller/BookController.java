@@ -28,8 +28,8 @@ public class BookController {
 
     // 동화 검색
     @Operation(summary = "동화 검색", description = "제목으로 검색한 책 목록 조회 API")
-    @GetMapping("?{title}")
-    public BaseResponse<BooksResponse> getBooksByTitle(@PathVariable String title){
+    @GetMapping("/search")
+    public BaseResponse<BooksResponse> getBooksByTitle(@RequestParam String title){
         val result = bookService.getBooksByTitle(title);
         return BaseResponse.success(READ_SEARCHED_BOOKS_BY_TITLE_SUCCESS, result);
     }

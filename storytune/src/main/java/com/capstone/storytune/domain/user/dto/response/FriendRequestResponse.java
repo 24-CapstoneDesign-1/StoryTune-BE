@@ -14,8 +14,8 @@ public record FriendRequestResponse(
     public static FriendRequestResponse of(Friend friend){
         return FriendRequestResponse.builder()
                 .friendId(friend.getId())
-                .username(friend.getFriend().getUsername())
-                .name(friend.getFriend().getName())
+                .username(friend.getUser().getUsername())
+                .name(friend.getUser().getName())
                 .build();
     }
 }

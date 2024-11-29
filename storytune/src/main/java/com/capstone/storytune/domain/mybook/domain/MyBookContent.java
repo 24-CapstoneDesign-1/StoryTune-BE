@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
@@ -23,11 +22,11 @@ public class MyBookContent {
 
     private String image;
 
-    private String guide;
-
     private boolean isLine;
 
-    private MyBookCharacter character;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "myBookCharacterId", nullable = true) // 등장인물이 없을 수 있음
+    private MyBookCharacter myBookCharacter;
 
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -39,12 +38,10 @@ public class MyBookContent {
     private String content_story;
 
     @Builder
-    public MyBookContent(String image){
+    public MyBookContent(String image, int page, MyBook myBook){
         this.image = image;
-    }
-
-    public void updateGuide(String guide){
-        this.guide = guide;
+        this.page = page;
+        this.myBook = myBook;
     }
 
     public void updateStory(String content, String scenario, String story, boolean isLine, MyBookCharacter character){
@@ -52,6 +49,8 @@ public class MyBookContent {
         this.content_scenario = scenario;
         this.content_story = story;
         this.isLine = isLine;
-        this.character = character;
+
+        // 대사일 경우 등장인물 설정, 해설일 경우 null 처리
+        this.myBookCharacter = isLine ? character : null;
     }
 }

@@ -7,13 +7,13 @@ import lombok.Builder;
 public record MyBookContentResponse(
         Long myBookContentId,
         String image,
-        String guide
+        String previousContent
 ) {
-    public static MyBookContentResponse of (MyBookContent myBookContent){
+    public static MyBookContentResponse of (MyBookContent myBookContent, String previousContent){
         return MyBookContentResponse.builder()
                 .myBookContentId(myBookContent.getId())
                 .image(myBookContent.getImage())
-                .guide(myBookContent.getGuide())
+                .previousContent(previousContent)
                 .build();
     }
 }

@@ -26,10 +26,13 @@ public enum ErrorCode {
     NOT_FOUND_MY_BOOK_CHARACTER_EXCEPTION(HttpStatus.BAD_REQUEST, "유효하지 않은 myBookCharacterId 입니다."),
     NOT_FOUND_FRIEND_EXCEPTION(HttpStatus.BAD_REQUEST, "유효하지 않은 friendId 입니다."),
     NOT_FOUND_REVERSE_FRIEND_EXCEPTION(HttpStatus.BAD_REQUEST, "반대 방향 Friend 객체를 찾을 수 없습니다."),
+    NOT_FOUND_ROLE_PLAYING_ROOM_ID_EXCEPTION(HttpStatus.BAD_REQUEST, "유효하지 않은 rolePlayingroomId 입니다."),
+    NOT_FOUND_PARTICIPANT_ID_EXCEPTION(HttpStatus.BAD_REQUEST, "유효하지 않은 participantId입니다."),
 
 
     // 500 internal server error
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 에러가 발생했습니다.");
+
 
     private final HttpStatus httpStatus;
     private final String message;
