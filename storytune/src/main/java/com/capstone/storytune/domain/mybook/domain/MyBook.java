@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -48,6 +50,18 @@ public class MyBook extends BaseEntity {
 
     public void updateTopic(Topic topic){
         this.topic = topic;
+    }
+
+    public void updateTitle(String title){
+        this.title = title;
+    }
+
+    public void updateCover(String cover){
+        this.cover = cover;
+    }
+
+    public void updateCompleted(Boolean completed){
+        this.completed = completed;
     }
 
 }

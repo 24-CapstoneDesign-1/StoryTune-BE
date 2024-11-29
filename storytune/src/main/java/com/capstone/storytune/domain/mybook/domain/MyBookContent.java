@@ -22,9 +22,11 @@ public class MyBookContent {
 
     private String image;
 
-    private String guide;
-
     private boolean isLine;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "myBookCharacterId", nullable = true) // 등장인물이 없을 수 있음
+    private MyBookCharacter myBookCharacter;
 
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -36,7 +38,19 @@ public class MyBookContent {
     private String content_story;
 
     @Builder
-    public MyBookContent(String image){
+    public MyBookContent(String image, int page, MyBook myBook){
         this.image = image;
+        this.page = page;
+        this.myBook = myBook;
+    }
+
+    public void updateStory(String content, String scenario, String story, boolean isLine, MyBookCharacter character){
+        this.content = content;
+        this.content_scenario = scenario;
+        this.content_story = story;
+        this.isLine = isLine;
+
+        // 대사일 경우 등장인물 설정, 해설일 경우 null 처리
+        this.myBookCharacter = isLine ? character : null;
     }
 }
