@@ -30,7 +30,9 @@ public class SecurityConfig {
             "/v3/api-docs/**",
 
             "/api/login",
-            "/api/signup"
+            "/api/signup",
+
+            "/api/mybook/**"
     };
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
