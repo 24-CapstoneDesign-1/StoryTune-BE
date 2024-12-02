@@ -6,10 +6,7 @@ import com.capstone.storytune.domain.user.domain.User;
 import com.capstone.storytune.domain.user.dto.request.FriendUpdateRequest;
 import com.capstone.storytune.domain.user.dto.request.LoginRequest;
 import com.capstone.storytune.domain.user.dto.request.SignupRequest;
-import com.capstone.storytune.domain.user.dto.response.FriendRequestResponse;
-import com.capstone.storytune.domain.user.dto.response.FriendResponse;
-import com.capstone.storytune.domain.user.dto.response.UserSearchResponse;
-import com.capstone.storytune.domain.user.dto.response.LoginResponse;
+import com.capstone.storytune.domain.user.dto.response.*;
 import com.capstone.storytune.domain.user.exception.*;
 import com.capstone.storytune.domain.user.repository.FriendRepository;
 import com.capstone.storytune.domain.user.repository.UserRepository;
@@ -126,5 +123,9 @@ public class UserService {
         return friends.stream()
                 .map(FriendResponse::of)
                 .toList();
+    }
+
+    public CurrentUserResponse getCurrentUser(User user){
+        return CurrentUserResponse.of(user);
     }
 }

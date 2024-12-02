@@ -43,8 +43,8 @@ public class MyBookService {
     private final S3Service s3Service;
     private final ChatGPTController gptController;
     private final MyBookCharacterRepository myBookCharacterRepository;
-    private final ChatGPTService chatGPTService;
     private final STTService sttService;
+    private final ChatGPTController chatGPTController;
 
     public MyBooksResponse getMyBooks(User user){
         List<MyBookResponse> myBooks = myBookRepository.findByUserOrderByCreatedAtDesc(user)
@@ -271,6 +271,34 @@ public class MyBookService {
         myBookRepository.save(myBook);
     }
 
+    public MyBookDetailsResponse getMyBookDetails(Long myBookId){
+        // myBook 찾기
+        MyBook myBook = myBookRepository.findById(myBookId)
+                .orElseThrow(() -> new NotFoundMyBookIdException(NOT_FOUND_MY_BOOK_ID_EXCEPTION));
 
+        // myBookContent 찾기
+        List<MyBookDetailResponse> details = myBookContentRepository.findAllByMyBook(myBook)
+                .stream()
+                .map(MyBookDetailResponse::of)
+                .toList();
 
+        return MyBookDetailsResponse.of(myBook, details);
+    }
+
+    public void updateMyBookInEnglish(Long myBookId){
+        // myBook 찾기
+        MyBook myBook = myBookRepository.findById(myBookId)
+                .orElseThrow(() -> new NotFoundMyBookIdException(NOT_FOUND_MY_BOOK_ID_EXCEPTION));
+
+        // myBookContents 가져오기 및 변환
+        List<MyBookContent> myBookContents = myBookContentRepository.findAllByMyBook(myBook);
+
+        for(MyBookContent content : myBookContents){
+            String translatedScenario = chatGPTController.makeInEnglish(content.getContent_scenario());
+            String translatedStory = chatGPTController.makeInEnglish(content.getContent_story());
+
+            content.updateInEnglish(translatedScenario, translatedStory);
+        }
+        myBookContentRepository.saveAll(myBookContents);
+    }
 }
