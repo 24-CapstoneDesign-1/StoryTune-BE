@@ -53,4 +53,9 @@ public class MyBookContent {
         // 대사일 경우 등장인물 설정, 해설일 경우 null 처리
         this.myBookCharacter = isLine ? character : null;
     }
+
+    public void updateInEnglish(String translatedScenario, String translatedStory){
+        this.content_story = translatedStory;
+        this.content_scenario = translatedScenario;
+    }
 }

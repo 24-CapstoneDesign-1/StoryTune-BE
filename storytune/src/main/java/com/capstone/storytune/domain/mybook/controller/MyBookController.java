@@ -23,20 +23,20 @@ import static com.capstone.storytune.global.dto.SuccessCode.*;
 public class MyBookController {
     private final MyBookService myBookService;
 
-    // 내가 만든 책 목록 조회
-    @Operation(summary = "내가 만든 책", description = "내가 만든 책 목록 조회 API (전체)")
-    @GetMapping("/mybook")
-    public BaseResponse<MyBooksResponse> getMyBooks(@CurrentUser User user){
-        val result = myBookService.getMyBooks(user);
-        return BaseResponse.success(READ_MY_BOOKS_SUCCESS, result);
-    }
-
     // 추천 책 목록 조회
     @Operation(summary = "다른 친구들은 어떤 책으로 만들었을까?", description = "추천 책 목록 조회 API (최신 5개)")
     @GetMapping("/book/recommendations")
     public BaseResponse<BooksResponse> getRecommendBooks(@CurrentUser User user){
         val result = myBookService.getRecommendBooks(user);
         return BaseResponse.success(READ_RECOMMEND_BOOKS_SUCCESS, result);
+    }
+
+    // 내가 만든 책 목록 조회
+    @Operation(summary = "내가 만든 책", description = "내가 만든 책 목록 조회 API (전체)")
+    @GetMapping("/mybook")
+    public BaseResponse<MyBooksResponse> getMyBooks(@CurrentUser User user){
+        val result = myBookService.getMyBooks(user);
+        return BaseResponse.success(READ_MY_BOOKS_SUCCESS, result);
     }
 
     // 동화 만들기 - 선택
@@ -129,7 +129,22 @@ public class MyBookController {
     }
 
     // 내가 만든 동화 보러가기
+    @Operation(summary = "내가 만든 동화 보러가기", description = "내가 만든 동화 조회하는 API")
+    @GetMapping("/mybook/{myBookId}")
+    public BaseResponse<MyBookDetailsResponse> getMyBookDetails(@PathVariable Long myBookId){
+        val result = myBookService.getMyBookDetails(myBookId);
+        return BaseResponse.success(READ_MY_BOOK_DETAIL_SUCCESS, result);
+    }
 
-    // 영어 동화로 바꾸고 싶어요 -> 영어로 바꿔서 저장
+    // 영어 동화로 바꾸고 싶어요 -> 영어로 바꿔서 저장 (patch)
+    @Operation(summary = "영어 동화로 바꾸고 싶어요", description = "내가 만든 이야기 영어로 바꿔서 저장하는 API")
+    @PatchMapping("/mybook/{myBookId}/english")
+    public BaseResponse updateMyBookInEnglish(@PathVariable Long myBookId){
+        myBookService.updateMyBookInEnglish(myBookId);
+        return BaseResponse.success(UPDATE_MY_BOOK_IN_ENGLISH_SUCCESS);
+    }
+
+    // 기존 동화 기반 동화 만들기 (bookId -> 알맞은 이미지, 내용 제공)
+
 
 }

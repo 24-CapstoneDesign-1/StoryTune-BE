@@ -11,4 +11,5 @@ public interface MyBookContentRepository extends JpaRepository<MyBookContent, Lo
     Optional<MyBookContent> findByMyBook_IdAndPage(Long myBookId, int page);
     List<MyBookContent> findAllByMyBook_IdAndPageLessThan(Long myBookId, int page);
     Optional<MyBookContent> findByMyBookAndPage(MyBook myBook, int page);
+    List<MyBookContent> findAllByMyBook(MyBook myBook);
 }
