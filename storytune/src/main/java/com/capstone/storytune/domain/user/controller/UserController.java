@@ -5,10 +5,7 @@ import com.capstone.storytune.domain.user.domain.User;
 import com.capstone.storytune.domain.user.dto.request.FriendUpdateRequest;
 import com.capstone.storytune.domain.user.dto.request.LoginRequest;
 import com.capstone.storytune.domain.user.dto.request.SignupRequest;
-import com.capstone.storytune.domain.user.dto.response.FriendRequestResponse;
-import com.capstone.storytune.domain.user.dto.response.FriendResponse;
-import com.capstone.storytune.domain.user.dto.response.UserSearchResponse;
-import com.capstone.storytune.domain.user.dto.response.LoginResponse;
+import com.capstone.storytune.domain.user.dto.response.*;
 import com.capstone.storytune.domain.user.service.UserService;
 import com.capstone.storytune.global.dto.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -75,6 +72,14 @@ public class UserController {
     public BaseResponse<List<FriendResponse>> getFriends(@CurrentUser User user){
         val result = userService.getFriends(user);
         return BaseResponse.success(READ_FRIENDS_SUCCESS, result);
+    }
+
+    // 현재 로그인 된 사용자 찾기
+    @Operation(summary = "현재 로그인 된 사용자 찾기", description = "현재 로그인 된 사용자 찾는 API")
+    @GetMapping("/user")
+    public BaseResponse<CurrentUserResponse> getCurrentUser(@CurrentUser User user){
+        val result = userService.getCurrentUser(user);
+        return BaseResponse.success(READ_CURRENT_USER_SUCCESS, result);
     }
 
 }

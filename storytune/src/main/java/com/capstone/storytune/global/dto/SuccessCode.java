@@ -27,6 +27,7 @@ public enum SuccessCode {
     READ_ROLE_PLAYING_ROLE_SUCCESS(OK, "역할놀이 역할 배정에 성공했습니다."),
     READ_ROLE_PLAYING_DETAIL_SUCCESS(OK, "역할놀이 상세 페이지 조회에 성공했습니다."),
     READ_MY_BOOK_DETAIL_SUCCESS(OK, "내가 만든 동화 읽어보기 상세 페이지 조회에 성공했습니다."),
+    READ_CURRENT_USER_SUCCESS(OK, "현재 로그인 된 유저 조회에 성공했습니다."),
 
     CREATE_MY_BOOK_SUCCESS(OK, "나만의 동화 만들기 생성에 성공했습니다."),
     CREATE_FRIEND_SUCCESS(OK, "친구 추가에 성공했습니다."),
