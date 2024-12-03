@@ -74,9 +74,9 @@ public class MyBookController {
     // 등장인물 이름 등록
     @Operation(summary = "이 친구의 이름은 무엇인가요?", description = "등장인물 이름 등록하는 API")
     @PatchMapping("/mybook/character/{myBookCharacterId}")
-    public BaseResponse updateCharacterName(@RequestParam("file")MultipartFile file, @PathVariable Long myBookCharacterId){
-        myBookService.updateCharacterName(file, myBookCharacterId);
-        return BaseResponse.success(UPDATE_MY_BOOK_CHARACTER_SUCCESS);
+    public BaseResponse<CharacterNameResponse> updateCharacterName(@RequestParam("file")MultipartFile file, @PathVariable Long myBookCharacterId){
+        val result = myBookService.updateCharacterName(file, myBookCharacterId);
+        return BaseResponse.success(UPDATE_MY_BOOK_CHARACTER_SUCCESS, result);
     }
 
     // 등장인물 조회
