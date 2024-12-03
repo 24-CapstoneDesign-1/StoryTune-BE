@@ -250,7 +250,7 @@ public class MyBookService {
         return CharacterImagesResponse.of(myBookCharacters);
     }
 
-    public void updateCharacterName(MultipartFile file, Long myBookCharacterId){
+    public CharacterNameResponse updateCharacterName(MultipartFile file, Long myBookCharacterId){
         // myBookCharacter 찾기
         MyBookCharacter myBookCharacter = myBookCharacterRepository.findById(myBookCharacterId)
                 .orElseThrow(() -> new NotFoundMyBookCharacterException(NOT_FOUND_MY_BOOK_CHARACTER_EXCEPTION));
@@ -259,6 +259,8 @@ public class MyBookService {
         String name = sttService.processStt(file, "Kor");
         myBookCharacter.updateName(name);
         myBookCharacterRepository.save(myBookCharacter);
+
+        return CharacterNameResponse.of(myBookCharacter);
     }
 
     public void updateCompleted(Long myBookId){
