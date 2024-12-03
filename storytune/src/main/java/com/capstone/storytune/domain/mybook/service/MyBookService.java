@@ -300,5 +300,5 @@ public class MyBookService {
             content.updateInEnglish(translatedScenario, translatedStory);
         }
         myBookContentRepository.saveAll(myBookContents);
-    }
+    } 
 }
