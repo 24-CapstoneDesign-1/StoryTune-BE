@@ -1,4 +1,4 @@
-# BookSpud Server
+# StoryTune Server
 > 2024-2 CAU CapstoneDesign
 <br/>
 
